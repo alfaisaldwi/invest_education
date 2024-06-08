@@ -46,13 +46,14 @@ class HomePageView extends GetView<HomePageController> {
                         color: Color(0xffF8C800),
                         textController: controller.tsearch,
                         onSuffixTap: () {
-                          controller.tsearch.clear();
+                          // controller.tsearch.clear();
                         },
                         onSubmitted: (query) {
                           showSearch(
                               context: context,
                               delegate: searchSuggest(),
                               query: query);
+
                           // cSearch.filterDic(value);
                           // // Get.to(() => KamusKeuanganPageView(), arguments: value);
                           // print(value);
@@ -296,18 +297,17 @@ class searchSuggest extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return SizedBox(
-      height: 20,
-    );
+    return buildSuggestions(context);
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    String? input;
     final suggest = kamusData.where((kamus) {
       final kataTitle = kamus.kata!.toLowerCase();
-      final input = query.toLowerCase();
+      input = query.toLowerCase();
 
-      return kataTitle.contains(input);
+      return kataTitle.contains(input!);
     }).toList();
     return SingleChildScrollView(
       child: Container(
@@ -328,54 +328,70 @@ class searchSuggest extends SearchDelegate {
             SizedBox(
               height: 5,
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              physics: ScrollPhysics(),
-              itemCount: suggest.length,
-              itemBuilder: (context, index) {
-                final sugg = suggest[index];
-                if (sugg.kata!.length <= 1 || suggest.length <= 1) {
-                  nf = 'Maaf pencarian tidak ditemukan';
-                  return Text(
-                    nf,
-                    style: GoogleFonts.inter(
-                        fontSize: 15.0, fontWeight: FontWeight.bold),
-                  );
-                } else {
-                  return Column(
-                    children: [
-                      Table(
-                        children: [
-                          TableRow(children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 8.0),
-                              child: Text(
-                                "${sugg.kata}",
-                                textAlign: TextAlign.justify,
-                                style: GoogleFonts.inter(
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8.0),
-                                child: Text(
-                                  "${sugg.arti}",
-                                  style: GoogleFonts.inter(
-                                    fontSize: 15.0,
+            suggest.isNotEmpty
+                ? ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    physics: ScrollPhysics(),
+                    itemCount: suggest.length,
+                    itemBuilder: (context, index) {
+                      final sugg = suggest[index];
+                      print(sugg.kata);
+                      print(
+                          'SUG ${sugg.kata!.length} || SUGGST ${suggest.length}');
+
+                      if (input!.length <= 2) {
+                        Text('Masukan setidaknya 2 huruf');
+                      }
+                      if (suggest.isEmpty || sugg.kata!.isEmpty) {
+                        nf = 'Maaf pencarian tidak ditemukan';
+                        return Text(
+                          nf,
+                          style: GoogleFonts.inter(
+                              fontSize: 15.0, fontWeight: FontWeight.bold),
+                        );
+                      } else {
+                        return Column(
+                          children: [
+                            Table(
+                              children: [
+                                TableRow(children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8.0),
+                                    child: Text(
+                                      "${sugg.kata}",
+                                      textAlign: TextAlign.justify,
+                                      style: GoogleFonts.inter(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
-                                )),
-                          ]),
-                        ],
-                      ),
-                    ],
-                  );
-                }
-              },
-            ),
+                                  Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8.0),
+                                      child: Text(
+                                        "${sugg.arti}",
+                                        style: GoogleFonts.inter(
+                                          fontSize: 15.0,
+                                        ),
+                                      )),
+                                ]),
+                              ],
+                            ),
+                          ],
+                        );
+                      }
+                    },
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Kata Tidak Ditemukan',
+                      style: GoogleFonts.inter(
+                          fontSize: 15.0, fontWeight: FontWeight.bold),
+                    ),
+                  ),
           ],
         ),
       ),
