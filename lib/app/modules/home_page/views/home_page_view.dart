@@ -53,10 +53,6 @@ class HomePageView extends GetView<HomePageController> {
                               context: context,
                               delegate: searchSuggest(),
                               query: query);
-
-                          // cSearch.filterDic(value);
-                          // // Get.to(() => KamusKeuanganPageView(), arguments: value);
-                          // print(value);
                         },
                       ),
                       GestureDetector(
