@@ -16,11 +16,21 @@ class KontenEduView extends GetView<KontenEduController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // backgroundColor: Color(0xff034779),
+        title: Text(
+          'Konten Edukasi',
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           color: Colors.white,
           child: Padding(
-            padding: const EdgeInsets.only(left: 30.0, right: 30, top: 80),
+            padding: const EdgeInsets.only(
+              left: 30.0,
+              right: 30,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

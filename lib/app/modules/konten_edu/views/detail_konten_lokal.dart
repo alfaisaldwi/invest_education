@@ -19,11 +19,21 @@ class DetailKontentLokalView extends GetView<KontenEduController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // backgroundColor: Color(0xff034779),
+        title: Text(
+          konten.judul,
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           color: Colors.white,
           child: Padding(
-            padding: const EdgeInsets.only(left: 30.0, right: 30, top: 80),
+            padding: const EdgeInsets.only(
+              left: 30.0,
+              right: 30,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -39,7 +49,7 @@ class DetailKontentLokalView extends GetView<KontenEduController> {
                   },
                   child: Center(
                       child: Image.network('${konten.img}',
-                          width: 400, height: 180)),
+                          width: 500, height: 300)),
                 ),
                 SizedBox(
                   height: 15,
@@ -67,18 +77,17 @@ class DetailKontentLokalView extends GetView<KontenEduController> {
                       ),
                       GestureDetector(
                         onTap: () async {
-                          String title = '${konten.judul}\n Link : ${
-                            konten.link
-                          } \nAyo download aplikasi e-duit untuk melihat artikel ini!';
-                          // String imageUrl = '${konten.img}';
-                          // String imagePath =
-                          //     await controller.downloadImage(imageUrl);
-                          // controller.shareImage(imagePath, title);
+                          String title =
+                              '${konten.judul}\n Link : ${konten.link} \nAyo download aplikasi e-duit untuk melihat artikel ini!';
+                          String imageUrl = '${konten.img}';
+                          String imagePath =
+                              await controller.downloadImage(imageUrl);
+                          controller.shareImage(imagePath, title);
 
-                          // Share.share('${[konten.img]}',
-                          //     subject: '${[konten.judul]}\n Link : ${[
-                          //       konten.link
-                          //     ]}');
+                          Share.share('${[konten.img]}',
+                              subject: '${[konten.judul]}\n Link : ${[
+                                konten.link
+                              ]}');
                           print(konten.link);
                         },
                         child: Icon(

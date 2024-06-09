@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -10,6 +9,10 @@ class DetailKontentView extends GetView<KontenEduController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(konten[0]['judul']),
+        backgroundColor: Color(0xff034779),
+      ),
       body: SingleChildScrollView(
         child: Container(
           color: Colors.white,
@@ -92,9 +95,7 @@ class DetailKontentView extends GetView<KontenEduController> {
                     ]),
                     Wrap(children: [
                       GestureDetector(
-                        onTap: () async {
-                        
-                        },
+                        onTap: () async {},
                         child: Icon(
                           Icons.thumb_up_alt_outlined,
                           color: Color(0xff034779),
