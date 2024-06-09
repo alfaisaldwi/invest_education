@@ -26,248 +26,247 @@ class HomePageView extends GetView<HomePageController> {
   Widget build(BuildContext context) {
     Get.put(KamusKeuanganPageController);
     var cSearch = KamusKeuanganPageController();
-    return Scaffold(
-      // bottomNavigationBar: Nammm()
-      body: SafeArea(
-        child: SingleChildScrollView(
+   return Scaffold(
+  body: SafeArea(
+    child: Stack(
+      children: [
+        SingleChildScrollView(
           child: Container(
             color: Colors.white,
             child: Padding(
-              padding: const EdgeInsets.only(left: 14.0, right: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Column(
                 children: [
-                  Column(
+                  SizedBox(height: 60), 
+                  GestureDetector(
+                    onTap: (() async {
+                      await PersistentNavBarNavigator.pushNewScreen(
+                        context,
+                        screen: GameQuizView(),
+                        withNavBar: true,
+                        pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                      );
+                    }),
+                    child: Container(
+                      height: 200,
+                      width: double.infinity,
+                      padding: EdgeInsets.all(3),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Color(0xff5EE8D1), width: 2),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.asset(
+                          'assets/images/home_kuis.png',
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 27),
+                  GestureDetector(
+                    onTap: () async {
+                      await PersistentNavBarNavigator.pushNewScreen(
+                        context,
+                        screen: KonsultasiView(),
+                        withNavBar: true,
+                        pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                      );
+                    },
+                    child: Container(
+                      height: 120,
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Color(0xff5EE8D1), width: 2),
+                        borderRadius: BorderRadius.circular(4.0),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(4.0),
+                        child: Image.asset(
+                          'assets/images/home_konsul.png',
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 27),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      AnimSearchBar(
-                        boxShadow: true,
-                        rtl: true,
-                        width: 400,
-                        helpText: 'Cari..',
-                        color: Color(0xffF8C800),
-                        textController: controller.tsearch,
-                        onSuffixTap: () {
-                          // controller.tsearch.clear();
-                        },
-                        onSubmitted: (query) {
-                          showSearch(
-                              context: context,
-                              delegate: searchSuggest(),
-                              query: query);
-                        },
-                      ),
-                      GestureDetector(
-                        onTap: (() async {
-                          await PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: GameQuizView(),
-                            withNavBar:
-                                true, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
-                          );
-                        }),
-                        child: Container(
-                          height: 200,
-                          width: double.infinity,
-                          padding: EdgeInsets.all(
-                            3,
-                          ),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            border:
-                                Border.all(color: Color(0xff5EE8D1), width: 2),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Image.asset(
-                            'assets/images/home_kuis.png',
-                            height: double.infinity,
+                      Flexible(
+                        child: GestureDetector(
+                          onTap: () async {
+                            await PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                              settings: RouteSettings(arguments: ArtikelPodcastController),
+                              context,
+                              screen: KontenEduView(),
+                              withNavBar: true,
+                              pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                            );
+                          },
+                          child: Container(
+                            height: 155,
                             width: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 27,
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          await PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: KonsultasiView(),
-                            withNavBar:
-                                true, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
-                          );
-                        },
-                        child: Container(
-                          height: 120,
-                          width: double.infinity,
-                          //color: Colors.purple,
-                          alignment: Alignment.center,
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            border:
-                                Border.all(color: Color(0xff5EE8D1), width: 2),
-                            borderRadius: BorderRadius.circular(4.0),
-                          ),
-                          child: Image.asset(
-                            'assets/images/home_konsul.png',
-                            height: double.infinity,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 27,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () async {
-                              await PersistentNavBarNavigator
-                                  .pushNewScreenWithRouteSettings(
-                                settings: RouteSettings(
-                                    arguments: ArtikelPodcastController),
-                                context,
-                                screen: KontenEduView(),
-                                withNavBar:
-                                    true, // OPTIONAL VALUE. True by default.
-                                pageTransitionAnimation:
-                                    PageTransitionAnimation.cupertino,
-                              );
-                            },
-                            child: Container(
-                              height: 155,
-                              width: 205,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: Color(0xff5EE8D1), width: 2),
-                                borderRadius: BorderRadius.circular(4.0),
-                              ),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Color(0xff5EE8D1), width: 2),
+                              borderRadius: BorderRadius.circular(4.0),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(4.0),
                               child: Image.asset(
                                 'assets/images/home_konten.png',
-                                height: double.infinity,
-                                width: double.infinity,
                                 fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
                               ),
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () async {
-                              await PersistentNavBarNavigator.pushNewScreen(
-                                context,
-                                screen: KamusKeuanganPageView(),
-                                withNavBar:
-                                    true, // OPTIONAL VALUE. True by default.
-                                pageTransitionAnimation:
-                                    PageTransitionAnimation.cupertino,
-                              );
-                            },
-                            child: Container(
-                              height: 155,
-                              width: 205,
-                              //color: Colors.purple,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: Color(0xff5EE8D1), width: 2),
-                                borderRadius: BorderRadius.circular(4.0),
-                              ),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Flexible(
+                        child: GestureDetector(
+                          onTap: () async {
+                            await PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: KamusKeuanganPageView(),
+                              withNavBar: true,
+                              pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                            );
+                          },
+                          child: Container(
+                            height: 155,
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Color(0xff5EE8D1), width: 2),
+                              borderRadius: BorderRadius.circular(4.0),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(4.0),
                               child: Image.asset(
                                 'assets/images/home_kamus.png',
-                                height: double.infinity,
-                                width: double.infinity,
                                 fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 27,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () async {
-                              await PersistentNavBarNavigator
-                                  .pushNewScreenWithRouteSettings(
-                                settings: RouteSettings(
-                                    arguments: ArtikelPodcastController),
-                                context,
-                                screen: UtangHomeView(),
-                                withNavBar:
-                                    true, // OPTIONAL VALUE. True by default.
-                                pageTransitionAnimation:
-                                    PageTransitionAnimation.cupertino,
-                              );
-                            },
-                            child: Container(
-                              height: 155,
-                              width: 205,
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: Color(0xff5EE8D1), width: 2),
-                                borderRadius: BorderRadius.circular(4.0),
-                              ),
-                              child: Image.asset(
-                                'assets/images/home_utang.png',
-                                height: double.infinity,
-                                width: double.infinity,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () async {
-                              await PersistentNavBarNavigator.pushNewScreen(
-                                context,
-                                screen: DaftarYmybView(),
-                                withNavBar:
-                                    true, // OPTIONAL VALUE. True by default.
-                                pageTransitionAnimation:
-                                    PageTransitionAnimation.cupertino,
-                              );
-                            },
-                            child: Container(
-                              height: 155,
-                              width: 205,
-                              //color: Colors.purple,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: Color(0xff5EE8D1), width: 2),
-                                borderRadius: BorderRadius.circular(4.0),
-                              ),
-                              child: Image.asset(
-                                'assets/images/home_komunitas.png',
-                                height: double.infinity,
-                                width: double.infinity,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 50,
+                        ),
                       ),
                     ],
                   ),
+                  SizedBox(height: 27),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: GestureDetector(
+                          onTap: () async {
+                            await PersistentNavBarNavigator.pushNewScreenWithRouteSettings(
+                              settings: RouteSettings(arguments: ArtikelPodcastController),
+                              context,
+                              screen: UtangHomeView(),
+                              withNavBar: true,
+                              pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                            );
+                          },
+                          child: Container(
+                            height: 155,
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Color(0xff5EE8D1), width: 2),
+                              borderRadius: BorderRadius.circular(4.0),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(4.0),
+                              child: Image.asset(
+                                'assets/images/home_utang.png',
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Flexible(
+                        child: GestureDetector(
+                          onTap: () async {
+                            await PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: DaftarYmybView(),
+                              withNavBar: true,
+                              pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                            );
+                          },
+                          child: Container(
+                            height: 155,
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Color(0xff5EE8D1), width: 2),
+                              borderRadius: BorderRadius.circular(4.0),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(4.0),
+                              child: Image.asset(
+                                'assets/images/home_komunitas.png',
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 50),
                 ],
               ),
             ),
           ),
         ),
-      ),
-    );
+        Positioned(
+          top: 10,
+          right: 14,
+          left: 14, // Optional: to make the search bar not too wide
+          child: AnimSearchBar(
+            boxShadow: true,
+            rtl: true,
+            width: MediaQuery.of(context).size.width - 28, // Calculate based on padding
+            helpText: 'Cari..',
+            color: Color(0xffF8C800),
+            textController: controller.tsearch,
+            onSuffixTap: () {
+              // controller.tsearch.clear();
+            },
+            onSubmitted: (query) {
+              showSearch(
+                  context: context,
+                  delegate: searchSuggest(),
+                  query: query);
+            },
+          ),
+        ),
+      ],
+    ),
+  ),
+);
+
   }
 }
 
