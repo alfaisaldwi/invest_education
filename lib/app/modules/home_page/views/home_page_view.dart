@@ -124,7 +124,7 @@ class HomePageView extends GetView<HomePageController> {
                               borderRadius: BorderRadius.circular(4.0),
                               child: Image.asset(
                                 'assets/images/home_konten.png',
-                                fit: BoxFit.cover,
+                                fit: BoxFit.fitWidth,
                                 width: double.infinity,
                                 height: double.infinity,
                               ),
@@ -155,7 +155,7 @@ class HomePageView extends GetView<HomePageController> {
                               borderRadius: BorderRadius.circular(4.0),
                               child: Image.asset(
                                 'assets/images/home_kamus.png',
-                                fit: BoxFit.cover,
+                                fit: BoxFit.fitWidth,
                                 width: double.infinity,
                                 height: double.infinity,
                               ),
@@ -193,7 +193,7 @@ class HomePageView extends GetView<HomePageController> {
                               borderRadius: BorderRadius.circular(4.0),
                               child: Image.asset(
                                 'assets/images/home_utang.png',
-                                fit: BoxFit.cover,
+                                fit: BoxFit.fitWidth,
                                 width: double.infinity,
                                 height: double.infinity,
                               ),
@@ -224,7 +224,7 @@ class HomePageView extends GetView<HomePageController> {
                               borderRadius: BorderRadius.circular(4.0),
                               child: Image.asset(
                                 'assets/images/home_komunitas.png',
-                                fit: BoxFit.cover,
+                                fit: BoxFit.fitWidth,
                                 width: double.infinity,
                                 height: double.infinity,
                               ),
